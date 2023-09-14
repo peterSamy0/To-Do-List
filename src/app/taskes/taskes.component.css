@@ -1,0 +1,20 @@
+.start-25{
+    left: 25px;
+}
+.add-btn:hover{
+    background-color: rgba(71, 71, 179, .5) !important;
+    color: aliceblue !important;
+}
+.w-9{
+    width: 90%;
+    
+}
+.cursor{
+    cursor: pointer;
+}
+.next:hover{
+    color: green;
+}
+.del:hover{
+    color: red;
+}

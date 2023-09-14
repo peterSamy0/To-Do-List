@@ -1,0 +1,45 @@
+<div class="row gap-3 w-100 py-5 justify-content-around">
+    <!-- list of task (to do, doing, done) -->
+    <div class="card col-lg-3 position-relative p-0" style="min-height: 200px;" *ngFor="let list of trello">
+        <div class="position-relative h-100 w-100 ">
+
+            <div class="card-body pb-5" #container>
+                <!-- name of the list -->
+                <h5 class="card-title fw-medium" style="border-bottom: 1px solid #000;">
+                    <fa-icon [icon]="list.listIcons.listIcon" class="fs-6 me-1" ></fa-icon> {{list.listname}}
+                </h5>
+                <!-- tasks container of the list -->
+                <div *ngFor="let task of list.tasks" class=" d-flex  text-light rounded bg-primary fw-bold mt-1 ps-2">
+                    {{ task }} 
+                    <div class="text-end flex-grow-1 ">
+                        <fa-icon [icon]="faTrash" class=" pe-3 cursor del text-danger" (click)="delFun(list, task)"></fa-icon>
+                        <fa-icon [icon]="faNext" class=" pe-3 cursor next" *ngIf="list.listname !== 'Done'" (click)="nextFun(list, task)"></fa-icon>
+                        
+
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="position-absolute bottom-0 start-0 w-100 ">
+                <!-- form to add new task -->
+                <form class="w-9 m-auto" *ngIf="list.showForm">
+                    <!-- input where the user enter the task name to add -->
+                    <div class="mb-3">
+                      <textarea class="form-control" id="taskName" #textarea name="task-name"></textarea>
+                    </div>
+                    <!-- add task to list container button  -->
+                    <button type="button" class="btn btn-primary  py-1 px-2" (click)="addFuc(list, textarea)">add</button> 
+                    <!-- cancel button to close the form -->
+                    <fa-icon [icon]='faCancel' class="cursor bg-danger fs-6 ms-2 py-1 px-2 rounded text-light" (click)="list.showForm = false"></fa-icon>
+                  </form>
+                <!-- button to open form that add new task -->
+                <button class="border-0 bg-white text-dark fw-bold add-btn w-100 py-1 text-start rounded" (click)="list.showForm = true" *ngIf="!list.showForm"> 
+                    <fa-icon [icon]="list.listIcons.faPlus" class="pe-1"></fa-icon>Add
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
